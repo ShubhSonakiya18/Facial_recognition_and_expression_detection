@@ -113,7 +113,7 @@ def _person_out(p: Person) -> dict:
         "photo_count": p.photo_count,
         "is_enrolled": p.is_enrolled,
         "is_active"  : p.is_active,
-        "added_by"   : str(p.added_by) if p.added_by else None,
+        "added_by"   : str(p.created_by) if p.created_by else None,
         "created_at" : p.created_at.isoformat(),
     }
 
@@ -264,7 +264,7 @@ async def create_person(
     """
     person = Person(
         org_id      = current_user.org_id,   # org_admin → their org; super_admin → null
-        added_by    = current_user.id,
+        created_by  = current_user.id,
         full_name   = payload.full_name,
         employee_id = payload.employee_id,
         department  = payload.department,
